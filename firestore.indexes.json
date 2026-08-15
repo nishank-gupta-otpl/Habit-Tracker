@@ -1,0 +1,21 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "entries",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "habitId", "order": "ASCENDING" },
+        { "fieldPath": "dayKey", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "urges",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "quitHabitId", "order": "ASCENDING" },
+        { "fieldPath": "dayKey", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
