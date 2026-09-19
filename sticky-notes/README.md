@@ -58,11 +58,12 @@ The app needs HTTPS (or `localhost`) before the service worker and the install
 prompt will work. `.github/workflows/sticky-notes-pages.yml` builds it and
 publishes it to GitHub Pages on every push to this branch.
 
-**One-time setup:** repo *Settings → Pages → Build and deployment → Source:
-**GitHub Actions***. The first run then publishes to
-`https://<owner>.github.io/<repo>/`. If the deploy step is rejected with a
-protection-rule error, add this branch under *Settings → Environments →
-github-pages → Deployment branches and tags*.
+**One-time setup, by hand:** repo *Settings → Pages → Build and deployment →
+Source: **GitHub Actions***. The workflow cannot do this itself — creating a
+Pages site needs repository admin, and the Actions token is refused. Re-run the
+workflow afterwards; it then publishes to `https://<owner>.github.io/<repo>/`.
+If the deploy step is rejected with a protection-rule error, add this branch
+under *Settings → Environments → github-pages → Deployment branches and tags*.
 
 On the phone, open that URL in Chrome and use the ⋮ menu → *Add to home
 screen* (Chrome may offer *Install app* by itself). Then add a note, turn on
