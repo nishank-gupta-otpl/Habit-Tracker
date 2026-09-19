@@ -234,3 +234,12 @@ src/
   The only thing Spark can't do is server-scheduled push — see [Reminders](#reminders).
 - **Bundle size.** Charts are lazy-loaded, so the initial download is ~273 KB gzipped and the
   ~99 KB charting library only arrives if you open the Review tab or a goal.
+
+---
+
+## Also in this repo
+
+[`sticky-notes/`](sticky-notes/README.md) — a separate, self-contained sticky notes
+PWA. It shares no code, config or Firebase project with Momentum and installs as
+its own app on the home screen. Notes are stored on the device; there is no
+sign-in and nothing is uploaded.

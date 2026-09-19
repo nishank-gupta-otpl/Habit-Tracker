@@ -1,0 +1,161 @@
+@import 'tailwindcss';
+
+/* Theme is a class on <html> so the user can override the system setting.
+   Tailwind 4's default dark variant follows prefers-color-scheme only. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Nunito', ui-rounded, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --color-board: #f3efe6;
+  --color-ink: #1c1917;
+}
+
+:root {
+  /* Note paper. Two tones per colour: the sheet and its darker top edge, which
+     is what stops eight pastels turning into a blur on a small screen. */
+  --note-butter: #ffe9a8;
+  --note-butter-edge: #f6d97f;
+  --note-apricot: #ffd3a6;
+  --note-apricot-edge: #f9bd80;
+  --note-rose: #ffc9d1;
+  --note-rose-edge: #f7adb9;
+  --note-lilac: #ded0fb;
+  --note-lilac-edge: #c7b3f5;
+  --note-sky: #c2e2fb;
+  --note-sky-edge: #a3d0f3;
+  --note-mint: #bdeccf;
+  --note-mint-edge: #99ddb4;
+  --note-sand: #ece2d2;
+  --note-sand-edge: #dbcdb6;
+  --note-slate: #d8dee6;
+  --note-slate-edge: #bfc8d4;
+
+  --note-ink: #26211c;
+  --note-ink-soft: #5f564c;
+
+  --surface: #f5f1e8;
+  --surface-raised: #fffdf8;
+  --surface-line: #e2dacb;
+  --text: #211d19;
+  --text-soft: #6b6157;
+
+  color-scheme: light;
+}
+
+.dark {
+  /* Dark mode keeps the hues but drops them to paper-in-lamplight levels.
+     Full-brightness pastels on a dark board are physically painful at night,
+     which is exactly when a notes app gets opened in bed. */
+  --note-butter: #57451c;
+  --note-butter-edge: #6b5626;
+  --note-apricot: #593a20;
+  --note-apricot-edge: #6d4828;
+  --note-rose: #5a2d37;
+  --note-rose-edge: #6e3945;
+  --note-lilac: #40355f;
+  --note-lilac-edge: #4f4175;
+  --note-sky: #234157;
+  --note-sky-edge: #2c516b;
+  --note-mint: #23483a;
+  --note-mint-edge: #2c5a49;
+  --note-sand: #4a4136;
+  --note-sand-edge: #5a5043;
+  --note-slate: #363f4a;
+  --note-slate-edge: #434e5b;
+
+  --note-ink: #f6efe4;
+  --note-ink-soft: #cdbfab;
+
+  --surface: #161513;
+  --surface-raised: #232120;
+  --surface-line: #34302c;
+  --text: #f3eee6;
+  --text-soft: #a79d91;
+
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-sans);
+  /* Chrome on Android overlays the URL bar; without this the board's last row
+     sits under it in browser tabs. */
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Paper. The gradient is the light catching the top edge of a real sticky
+   note — it is what makes a coloured rectangle read as a physical object. */
+.note-paper {
+  background: linear-gradient(
+    to bottom,
+    var(--paper-edge) 0,
+    var(--paper-edge) 6px,
+    var(--paper) 6px
+  );
+  color: var(--note-ink);
+}
+
+.note-butter { --paper: var(--note-butter); --paper-edge: var(--note-butter-edge); }
+.note-apricot { --paper: var(--note-apricot); --paper-edge: var(--note-apricot-edge); }
+.note-rose { --paper: var(--note-rose); --paper-edge: var(--note-rose-edge); }
+.note-lilac { --paper: var(--note-lilac); --paper-edge: var(--note-lilac-edge); }
+.note-sky { --paper: var(--note-sky); --paper-edge: var(--note-sky-edge); }
+.note-mint { --paper: var(--note-mint); --paper-edge: var(--note-mint-edge); }
+.note-sand { --paper: var(--note-sand); --paper-edge: var(--note-sand-edge); }
+.note-slate { --paper: var(--note-slate); --paper-edge: var(--note-slate-edge); }
+
+/* Masonry. CSS columns beat a JS grid here: notes are different heights, the
+   browser reflows them for free on rotate, and there is no layout jump on
+   first paint. The trade-off is top-to-bottom-then-across ordering, which is
+   how a pinboard reads anyway. */
+.masonry {
+  column-gap: 0.75rem;
+  column-fill: balance;
+}
+
+.masonry > * {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+}
+
+/* A dragged note lifts off the board and stops being a drop target itself. */
+.dragging {
+  opacity: 0.35;
+}
+
+textarea.autogrow {
+  field-sizing: content;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-rise {
+  animation: rise 0.18s ease-out both;
+}
