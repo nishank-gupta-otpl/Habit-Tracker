@@ -54,19 +54,28 @@ npm run icons     # regenerate the app icons (pure Python, no dependencies)
 
 ### Getting it onto your phone
 
-The app needs to be served over HTTPS (or `localhost`) for the service worker
-and the install prompt to work. Any static host will do — the build output in
-`dist/` is plain files.
+The app needs HTTPS (or `localhost`) before the service worker and the install
+prompt will work. `.github/workflows/sticky-notes-pages.yml` builds it and
+publishes it to GitHub Pages on every push to this branch.
 
-- **Same wifi, no deploy:** `npm run dev -- --host`, then open the printed
-  `http://<your-laptop-ip>:5173` on the phone. Good for trying it; the install
-  prompt and offline mode will not work over plain HTTP.
-- **Deployed:** upload `dist/` to any static host (Firebase Hosting, Netlify,
-  GitHub Pages, Cloudflare Pages). Open the URL in Chrome on the phone, then
-  menu → *Add to home screen*.
+**One-time setup:** repo *Settings → Pages → Build and deployment → Source:
+**GitHub Actions***. The first run then publishes to
+`https://<owner>.github.io/<repo>/`. If the deploy step is rejected with a
+protection-rule error, add this branch under *Settings → Environments →
+github-pages → Deployment branches and tags*.
 
-Once installed, open it, add a note, then put the phone in aeroplane mode and
-reopen it — everything is still there.
+On the phone, open that URL in Chrome and use the ⋮ menu → *Add to home
+screen* (Chrome may offer *Install app* by itself). Then add a note, turn on
+aeroplane mode and reopen it — everything is still there.
+
+Any other static host works too: the build output in `dist/` is plain files.
+Serving from a domain root needs no configuration; serving from a subfolder
+needs `APP_BASE` set to that path at build time, because the manifest's scope
+has to match the URL it is served from or Android will not offer to install it.
+
+To try it without deploying, `npm run dev -- --host` and open the printed
+`http://<your-laptop-ip>:5173` on a phone on the same wifi. Plain HTTP means no
+install and no offline, so it is for a look rather than for daily use.
 
 ## How it is put together
 

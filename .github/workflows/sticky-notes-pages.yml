@@ -1,0 +1,73 @@
+# Builds the Sticky Notes app and publishes it to GitHub Pages.
+#
+# One-time setup: repo Settings -> Pages -> Build and deployment -> Source:
+# "GitHub Actions". If the deploy step is then rejected with a protection-rule
+# error, add this branch under Settings -> Environments -> github-pages ->
+# Deployment branches and tags.
+name: Deploy Sticky Notes
+
+on:
+  push:
+    branches: [claude/android-sticky-notes-app-27fuv0]
+    paths:
+      - 'sticky-notes/**'
+      - '.github/workflows/sticky-notes-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it — a half-published
+# service worker is worse than a slightly stale one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sticky-notes
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: sticky-notes/package-lock.json
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        # A project site is served from /<repo>/, so the app has to be built
+        # for that path: the manifest scope must match the URL it is served
+        # from or Android will not offer to install it.
+        env:
+          APP_BASE: /${{ github.event.repository.name }}/
+        run: npm run build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: sticky-notes/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

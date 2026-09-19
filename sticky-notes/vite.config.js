@@ -3,7 +3,14 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+// Where the app will be served from. Defaults to the domain root; GitHub
+// Pages serves a project site from /<repo>/, so the workflow sets this and
+// every URL below is built from it — a manifest whose scope does not match
+// the page it is served from will not install on Android.
+const base = process.env.APP_BASE ?? '/';
+
 export default defineConfig({
+  base,
   plugins: [
     react(),
     tailwindcss(),
@@ -12,7 +19,7 @@ export default defineConfig({
       includeAssets: ['favicon.svg', 'icons/*.png'],
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
-        navigateFallback: 'index.html',
+        navigateFallback: `${base}index.html`,
         // Google Fonts are precached on first run so the app keeps its
         // typeface offline — a home-screen app that falls back to Times the
         // moment the signal drops looks broken.
@@ -36,8 +43,8 @@ export default defineConfig({
         background_color: '#f5f1e8',
         display: 'standalone',
         orientation: 'portrait',
-        scope: '/',
-        start_url: '/',
+        scope: base,
+        start_url: base,
         categories: ['productivity', 'utilities'],
         icons: [
           { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
@@ -57,14 +64,14 @@ export default defineConfig({
         ],
         // Long-pressing the home-screen icon on Android offers these.
         shortcuts: [
-          { name: 'New note', short_name: 'New note', url: '/?new=note' },
-          { name: 'New checklist', short_name: 'Checklist', url: '/?new=list' },
+          { name: 'New note', short_name: 'New note', url: `${base}?new=note` },
+          { name: 'New checklist', short_name: 'Checklist', url: `${base}?new=list` },
         ],
         // Puts the app in Android's share sheet: sharing text from any app
         // opens a pre-filled note. GET keeps it a plain navigation, so no
         // service-worker POST handler is needed.
         share_target: {
-          action: '/',
+          action: base,
           method: 'GET',
           params: { title: 'share_title', text: 'share_text', url: 'share_url' },
         },
