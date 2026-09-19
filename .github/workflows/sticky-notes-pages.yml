@@ -1,9 +1,10 @@
 # Builds the Sticky Notes app and publishes it to GitHub Pages.
 #
-# One-time setup: repo Settings -> Pages -> Build and deployment -> Source:
-# "GitHub Actions". If the deploy step is then rejected with a protection-rule
-# error, add this branch under Settings -> Environments -> github-pages ->
-# Deployment branches and tags.
+# The configure step turns Pages on by itself, so there is normally nothing to
+# set up by hand. If it reports that it cannot, set it manually: repo Settings
+# -> Pages -> Build and deployment -> Source: "GitHub Actions". And if the
+# deploy step is rejected with a protection-rule error, add this branch under
+# Settings -> Environments -> github-pages -> Deployment branches and tags.
 name: Deploy Sticky Notes
 
 on:
@@ -57,6 +58,10 @@ jobs:
         run: npm run build
 
       - uses: actions/configure-pages@v5
+        with:
+          # Enables Pages (with the Actions build type) if it is not already
+          # on, rather than failing and waiting for someone to flip a switch.
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
