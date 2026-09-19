@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "plugins": ["react", "jsx-a11y"],
+  "env": { "browser": true, "es2024": true },
+  "rules": {
+    "no-unused-vars": "error",
+    "react/jsx-key": "error",
+    "react/no-danger": "error",
+    "jsx-a11y/prefer-tag-over-role": "off"
+  },
+  "ignorePatterns": ["dist", "dev-dist", "node_modules"]
+}

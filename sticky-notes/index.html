@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- viewport-fit=cover lets the board run under the Android gesture bar;
+         the app pads itself back out with env(safe-area-inset-*). -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0"
+    />
+    <meta name="theme-color" content="#f5f1e8" />
+    <meta name="description" content="A private sticky notes board that works offline on your phone." />
+
+    <title>Sticky Notes</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Notes" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      // Applied before first paint so the board never flashes white on a phone
+      // that is in dark mode.
+      try {
+        const stored = localStorage.getItem('sticky-notes:theme');
+        const dark =
+          stored === 'dark' ||
+          ((!stored || stored === 'system') &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) {
+          document.documentElement.classList.add('dark');
+          document.querySelector('meta[name="theme-color"]').content = '#161513';
+        }
+      } catch (error) {
+        // No storage access: the system preference still applies at runtime.
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
