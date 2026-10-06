@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>GK Olympiad Prep</title>
+  <meta name="description" content="Class 3 General Knowledge Olympiad practice — chapter quizzes, timed mock test with OMR sheet, English + Hindi.">
+  <meta name="theme-color" content="#5b5fc7">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-btn" id="backBtn" aria-label="Back" hidden>←</button>
+    <h1 id="title">GK Olympiad Prep</h1>
+    <button class="lang-chip" id="langBtn" aria-pressed="false" title="Show Hindi alongside English">अ+A</button>
+  </header>
+  <main id="app" aria-live="polite"></main>
+  <div id="toast" role="status"></div>
+  <script src="questions.js"></script>
+  <script src="questions-hi.js"></script>
+  <script src="parse.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

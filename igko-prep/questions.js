@@ -122,7 +122,7 @@ const BUILTIN_QUESTIONS = [
   { c: 5, q: 'Birbal was a clever minister in the court of', o: ['Ashoka', 'Shivaji', 'Akbar', 'Krishnadevaraya'], a: 2, e: 'Birbal was in Emperor Akbar\'s court. Tenali Raman was in Krishnadevaraya\'s court.' },
   { c: 5, q: 'Which of these letters is a vowel?', o: ['B', 'K', 'T', 'E'], a: 3, e: 'The vowels are A, E, I, O and U.' },
   { c: 5, q: 'Which word can be made using only the letters of "TEACHER"?', o: ['CHEAT', 'CHAIR', 'PEACH', 'BEACH'], a: 0, e: 'CHEAT uses C, H, E, A, T — all are in TEACHER. CHAIR needs I, PEACH needs P, BEACH needs B.', h: true },
-  { c: 5, q: 'Find the odd one out.', o: ['Apple', 'Mango', 'Carrot', 'Banana'], a: 2, e: 'Carrot is a vegetable; the others are fruits.', h: true },
+  { c: 5, q: 'Which word is the odd one out?', o: ['Apple', 'Mango', 'Carrot', 'Banana'], a: 2, e: 'Carrot is a vegetable; the others are fruits.', h: true },
   { c: 5, q: 'In the story, whose nose grew longer every time he told a lie?', o: ['Aladdin', 'Pinocchio', 'Peter Pan', 'Tom Thumb'], a: 1, e: 'Pinocchio\'s nose grew whenever he lied.', h: true },
 
   // ── Chapter 6: Earth and Its Environment ──
@@ -161,7 +161,7 @@ const BUILTIN_QUESTIONS = [
   { c: 7, q: 'Vande Bharat Express is a', o: ['Ship', 'Bus', 'Aeroplane', 'Train'], a: 3, e: 'Vande Bharat Express is a fast, modern Indian train.' },
   { c: 7, q: 'In olden days, which bird was trained to carry messages?', o: ['Pigeon', 'Crow', 'Parrot', 'Sparrow'], a: 0, e: 'Homing pigeons were used to carry messages.' },
   { c: 7, q: 'Which of these does NOT need fuel to move?', o: ['Car', 'Bicycle', 'Bus', 'Motorcycle'], a: 1, e: 'A bicycle moves with pedal power.' },
-  { c: 7, q: 'Find the odd one out.', o: ['Bus', 'Car', 'Boat', 'Truck'], a: 2, e: 'A boat moves on water; the others move on roads.', h: true },
+  { c: 7, q: 'Which vehicle is the odd one out?', o: ['Bus', 'Car', 'Boat', 'Truck'], a: 2, e: 'A boat moves on water; the others move on roads.', h: true },
   { c: 7, q: 'Rohan wants to talk to his grandmother in another city and also see her face. What should he use?', o: ['Letter', 'Radio', 'Newspaper', 'Video call'], a: 3, e: 'A video call lets you both talk and see each other.', h: true },
   { c: 7, q: 'Which pair is INCORRECT?', o: ['Ship – Water', 'Aeroplane – Air', 'Train – Air', 'Bus – Road'], a: 2, e: 'A train runs on land (rails), not in the air.', h: true },
 

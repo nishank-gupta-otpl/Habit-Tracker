@@ -1,0 +1,10 @@
+{
+  "name": "gk-olympiad-prep",
+  "private": true,
+  "description": "Static PWA — no build step. This file only sets CommonJS for the Node test script.",
+  "type": "commonjs",
+  "scripts": {
+    "test": "node tests/check.js",
+    "start": "python3 -m http.server 8080"
+  }
+}
